@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>msg</title>
+	<!-- Latest compiled and minified CSS & JS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<script src="//code.jquery.com/jquery.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="jquery-3.3.1.js"></script>
+	<style type="text/css">
+		.banner{
+			height: 50px;
+		}
+		textarea{
+			resize: none;
+			width: 100%;
+			height: 100px;
+			padding:5px 10px;
+		}
+		#name{
+			width: 50%;
+		}
+		.postHere{
+			height: 300px;
+			overflow-y: auto;
+		}
+	</style>
+	<meta name="viewport" content="width=device-width,initial-scale = 1.0">
+</head>
+<body>
+<div class="container">
+	<div class="row banner"></div>
+	<div class="row">
+		<div class="col-md-6">
+			<p class="text-muted">Name</p>
+			<input type="text" id="name">
+			<hr>
+			<textarea></textarea>
+			<br>
+			<button class="btn btn-primary">
+				Post It Now
+			</button>
+		</div>
+		<div class="col-md-6">
+			<h5 class="text-info">POSTS</h5>
+			<div class="alert postHere">
+				
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	$(function(){
+		$('button').click(function(){
+			$.post('post.php',{name:$('input').val(),post:$('textarea').val()});
+			$('textarea').val('');
+			$('input').val('');
+		});
+	})
+
+	function refresh(){
+			$('.postHere').load('./loadPost.php');
+	}
+	setInterval(refresh,50);
+</script>
+</body>
+</html>
